@@ -5,35 +5,43 @@ const IOTA = require('iota.lib.js');
 const PORT = process.env.PORT || 5000
 const app = express();
 const bodyParser = require('body-parser');
+const morgan = require('morgan');
+
+const provider = 'https://iotanode.us:443';
+var iota = new IOTA({ provider });
+
+
 app.use(cors())
+app.use(morgan(':method :url :status :res[content-length] - :response-time ms'));
 app.use(express.static(path.join(__dirname, 'public')))
-
-
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.post('/api/seedSubmit', (req, res) => {
+  const { seed } = req.body;
+  iota.api.getAccountData(seed, (err, accountData) => {
+    if (err) {
+      console.error('error', err);
+    } else {
+      console.log("Account data", accountData);
 
-  res.send('yooooo')
+      const messages = [];
+      accountData.transfers.forEach(transfer => {
+        const message = iota.utils.extractJson(transfer);
+        if (message !== null) {
+          console.log('message', message);
+          messages.push(message);
+        }
+      })
+      res.send(messages);
+    }
+  })
 })
-//
-//
-// const provider = 'https://iotanode.us:443';
-//
-// var iota = new IOTA({ provider });
-// const seed = '';
-// iota.api.getAccountData(seed, (err, accountData) => {
-//   if (err) {
-//     console.error('error', err);
-//   } else {
-//     console.log("Account data", accountData);
-//     accountData.transfers.forEach(transfer => {
-//       var message = iota.utils.extractJson(transfer);
-//       console.log('message', message);
-//     })
-//   }
-// })
-//
+
+
+
+
+
 // const messageToSend = {
 //   name: 'David',
 //   message: 'Hello from Node.js'
