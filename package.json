@@ -7,7 +7,8 @@
   "license": "MIT",
   "scripts": {
     "start": "node server",
-    "node": "nodemon server"
+    "node": "nodemon server",
+    "webpack": "webpack-dev-server"
   },
   "dependencies": {
     "body-parser": "^1.18.2",
@@ -17,11 +18,20 @@
     "iota.lib.js": "^0.4.6",
     "morgan": "^1.9.0",
     "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react-dom": "^16.2.0",
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.9.7"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^8.1.2",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
+    "babel-preset-react-hmre": "^1.1.1",
+    "babel-preset-stage-2": "^6.24.1",
     "css-loader": "^0.28.7",
     "extract-text-webpack-plugin": "^3.0.2",
     "file-loader": "^1.1.6",
