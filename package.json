@@ -7,10 +7,11 @@
   "license": "MIT",
   "scripts": {
     "start": "node server",
-    "node": "nodemon --harmony server"
+    "node": "nodemon server"
   },
   "dependencies": {
     "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
     "express": "^4.16.2",
     "ffi": "^2.2.0",
     "iota.lib.js": "^0.4.6",
