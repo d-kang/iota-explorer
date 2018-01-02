@@ -17,6 +17,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+
 app.post('/api/seedSubmit', (req, res) => {
   const { seed } = req.body;
   iota.api.getAccountData(seed, (err, accountData) => {

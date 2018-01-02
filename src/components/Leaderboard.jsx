@@ -2,8 +2,8 @@ import React from 'react';
 import Header from './Header';
 import Sidebar from './Sidebar';
 import Table from './Table';
-
-class App extends React.Component {
+import { Link } from 'react-router-dom';
+class Leaderboard extends React.Component {
   state = {
     isActive: false,
     rankedList: [
@@ -79,4 +79,4 @@ const style = {
   },
 }
 
-export default App;
+export default Leaderboard;
