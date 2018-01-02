@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import '../assets/style.scss';
-import Leaderboard from './components/Leaderboard';
-import Send from './components/Send';
+import Leaderboard from './components/Leaderboard/Leaderboard';
+import Send from './components/Send/Send';
 import {
   HashRouter,
   Route,

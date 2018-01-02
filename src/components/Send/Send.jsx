@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Header from './Header';
 import Sidebar from './Sidebar';
-
+import logoBlack from '../../../assets/images/logo-black.png';
 class Send extends Component {
   state = {
     isActive: false,
@@ -35,7 +35,7 @@ class Send extends Component {
                     <div className="row">
 
                         <div className="col-xs-12 send__body-title">
-                            <p className="send__body-balance"><img className="send__logo" src="images/logo-black.png" /> Balance: <span className="label label-primary" id="iota__balance">0</span></p>
+                            <p className="send__body-balance"><img className="send__logo" src={logoBlack} /> Balance: <span className="label label-primary" id="iota__balance">0</span></p>
                         </div>
 
                         <div className="col-xs-6">
