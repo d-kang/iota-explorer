@@ -53,43 +53,38 @@ app.post('/api/send/seedSubmit', (req, res) => {
     } else {
       console.log("Account data", accountData);
       const { balance, latestAddress } = accountData;
-      const data = { seed, balance, latestAddress };
+      const data = { seed, balance };
       console.log('data', data);
       res.send(data);
     }
   })
 })
 
-app.post('/api/send/formData', (req, res) => {
+app.post('/api/send/sendTransfer', (req, res) => {
+  console.log('/api/send/sendTransfer req.body>>>', req.body);
+  const { name, value, address, message, seed } = req.body
+  const messageToSend = { name, message };
+  var messageTrytes = iota.utils.toTrytes(JSON.stringify(messageToSend));
 
+  var transfer = [{
+    address,
+    value: parseInt(value),
+    message: messageTrytes,
+  }];
+  console.log('transfer', transfer);
+  const depth = 4;
+  const mwm = 14; // minWeightMagnitude
+
+  iota.api.sendTransfer(seed, depth, mwm, transfer, (e, success) => {
+    if (e) {
+      console.error(e)
+      res.send(e)
+    } else {
+      console.log('sendTransfer Success!', success);
+      res.send(success);
+    }
+  })
 })
-
-
-
-
-
-// const messageToSend = {
-//   name: 'David',
-//   message: 'Hello from Node.js'
-// };
-// var messageTrytes = iota.utils.toTrytes(JSON.stringify(messageToSend));
-//
-// var transfer = [{
-//   address: "",
-//   value: parseInt(1),
-//   message: messageTrytes
-// }];
-//
-// const depth = 4;
-// const mwm = 14; // minWeightMagnitude
-//
-// iota.api.sendTransfer(seed, depth, mwm, transfer, (e, success) => {
-//   if (e) {
-//     console.error(e)
-//   } else {
-//     console.log('sendTransfer Success!', success);
-//   }
-// })
 
 
 app.get('/', (req, res) => res.send('pages/index'))

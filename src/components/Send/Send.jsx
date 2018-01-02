@@ -21,7 +21,6 @@ class Send extends Component {
     info: {
       seed: '',
       balance: 0,
-      latestAddress: '',
     }
   }
 
@@ -38,14 +37,14 @@ class Send extends Component {
       value: this._value.value,
       address: this._address.value,
       message: this._message.value,
+      seed: this.state.info.seed,
     };
-
     return myInputs;
   }
-  sendMessage = () => {
+  sendTransfer = () => {
     const data = this.getRefs();
 
-    axios.post('http://localhost:5000/api/seedSubmit', data)
+    axios.post('http://localhost:5000/api/send/sendTransfer', data)
       .then(response => {
         console.log('response.data!!', response.data);
         // this.props.updateRankedList(response.data);
@@ -60,7 +59,6 @@ class Send extends Component {
   }
 
   toggleSidebar = () => {
-    console.log('toggleSidebar ran!')
     this.setState({ isActive: !this.state.isActive })
   }
   myClassObj = () => {
@@ -135,7 +133,7 @@ class Send extends Component {
                   </Form>
                 </Col>
                 <div className="send__button">
-                  <Button onClick={this.sendMessage} id="submit" bsStyle="success" bsSize="large">Submit</Button>
+                  <Button onClick={this.sendTransfer} id="submit" bsStyle="success" bsSize="large">Submit</Button>
                 </div>
 
                 <Collapse in={this.state.POW}>

@@ -42,7 +42,6 @@ class Sidebar extends React.Component {
   }
 
   render() {
-    console.log('this.props',this.props)
     return (
       <div className={this.props.myClass().sideBar}>
         <ul className="sidebar-list">
