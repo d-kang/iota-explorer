@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Heading from './Header';
 import Sidebar from './Sidebar';
-
+import axios from 'axios';
 import logoBlack from '../../../assets/images/logo-black.png';
 import {
   Grid,
@@ -18,6 +18,17 @@ class Send extends Component {
   state = {
     isActive: false,
     POW: false,
+    info: {
+      seed: '',
+      balance: 0,
+      latestAddress: '',
+    }
+  }
+
+  updateInfo = (info) => {
+    this.setState({ info }, () => {
+      console.log('this.state.info', this.state.info);
+    });
   }
 
   getRefs = () => {
@@ -28,8 +39,22 @@ class Send extends Component {
       address: this._address.value,
       message: this._message.value,
     };
-    console.log('myInputs', myInputs);
+
+    return myInputs;
   }
+  sendMessage = () => {
+    const data = this.getRefs();
+
+    axios.post('http://localhost:5000/api/seedSubmit', data)
+      .then(response => {
+        console.log('response.data!!', response.data);
+        // this.props.updateRankedList(response.data);
+      })
+      .catch(error => {
+        console.log('error', error);
+      });
+  }
+
   proofOfWork = () => {
     this.setState({ POW: true });
   }
@@ -60,7 +85,7 @@ class Send extends Component {
                 <Col xs={12}>
                   <p className="send__body-balance">
                     <img className="send__logo" src={logoBlack}/> <strong style={{fontSize: '25px'}}>Balance:</strong>
-                    <Label bsStyle="primary" id="iota__balance">0</Label>
+                    <Label bsStyle="primary" id="iota__balance">{this.state.info.balance}</Label>
                   </p>
                 </Col>
                 <Col xs={6}>
@@ -110,7 +135,7 @@ class Send extends Component {
                   </Form>
                 </Col>
                 <div className="send__button">
-                  <Button onClick={this.getRefs} id="submit" bsStyle="success" bsSize="large">Submit</Button>
+                  <Button onClick={this.sendMessage} id="submit" bsStyle="success" bsSize="large">Submit</Button>
                 </div>
 
                 <Collapse in={this.state.POW}>
@@ -146,7 +171,10 @@ class Send extends Component {
             </div>
           </Grid>
         </main>
-        <Sidebar myClass={this.myClassObj}/>
+        <Sidebar
+          updateInfo={this.updateInfo}
+          myClass={this.myClassObj}
+        />
       </div>
     )
   }

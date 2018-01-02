@@ -31,7 +31,7 @@ class Sidebar extends React.Component {
     }
 
 
-    axios.post('http://localhost:5000/api/seedSubmit', data)
+    axios.post('http://localhost:5000/api/leaderboard/seedSubmit', data)
       .then(response => {
         console.log('response!!', response);
         this.props.updateRankedList(response.data);

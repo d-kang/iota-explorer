@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 
-app.post('/api/seedSubmit', (req, res) => {
+app.post('/api/leaderboard/seedSubmit', (req, res) => {
   const { seed } = req.body;
   iota.api.getAccountData(seed, (err, accountData) => {
     if (err) {
@@ -42,6 +42,26 @@ app.post('/api/seedSubmit', (req, res) => {
       res.send(messages);
     }
   })
+})
+
+
+app.post('/api/send/seedSubmit', (req, res) => {
+  const { seed } = req.body;
+  iota.api.getAccountData(seed, (err, accountData) => {
+    if (err) {
+      console.error('error', err);
+    } else {
+      console.log("Account data", accountData);
+      const { balance, latestAddress } = accountData;
+      const data = { seed, balance, latestAddress };
+      console.log('data', data);
+      res.send(data);
+    }
+  })
+})
+
+app.post('/api/send/formData', (req, res) => {
+
 })
 
 

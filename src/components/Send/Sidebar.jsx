@@ -24,17 +24,14 @@ class Sidebar extends React.Component {
 
   seedSubmit = (e) => {
     e.preventDefault();
-    this.setState({ clicked: true});
-    const data = {
-      name: 'David',
-      seed: this.state.seed
-    }
+    this.setState({ clicked: true });
+    const data = { seed: this.state.seed }
 
 
-    axios.post('http://localhost:5000/api/seedSubmit', data)
+    axios.post('http://localhost:5000/api/send/seedSubmit', data)
       .then(response => {
-        console.log('response!!', response);
-        this.props.updateRankedList(response.data);
+        console.log('response.data!!', response.data);
+        this.props.updateInfo(response.data);
       })
       .catch(error => {
         console.log('error', error);
