@@ -13,6 +13,7 @@ import axios from 'axios';
 class Sidebar extends React.Component {
   state = {
     seed: '',
+    clicked: false,
   }
 
 
@@ -21,24 +22,27 @@ class Sidebar extends React.Component {
 
   }
 
-  hello = (e) => {
+  seedSubmit = (e) => {
     e.preventDefault();
-
+    this.setState({ clicked: true});
     const data = {
       name: 'David',
       seed: this.state.seed
     }
 
+
     axios.post('http://localhost:5000/api/seedSubmit', data)
-      .then(function (response) {
-        console.log(response);
+      .then(response => {
+        console.log('response!!', response);
+        this.props.updateRankedList(response.data);
       })
-      .catch(function (error) {
-        console.log(error);
+      .catch(error => {
+        console.log('error', error);
       });
   }
 
   render() {
+    console.log('this.props',this.props)
     return (
       <div className={this.props.myClass().sideBar}>
         <ul className="sidebar-list">
@@ -55,13 +59,15 @@ class Sidebar extends React.Component {
 
             <Collapse in={this.state.openSeed} id="setSeed">
               <Well id="enterSeed">
-                <Form onSubmit={this.hello}>
+                <Form onSubmit={this.seedSubmit}>
                   <FormControl
                     onChange={this.collectSeed}
                     type="password"
                     id="userSeed"
                     placeholder="Your Seed" />
                   <Button type="submit" id="seedSubmit">Submit</Button>
+
+                  {this.state.clicked && <div className="alert alert-success" role="alert">Successfully saved your seed. You can generate an address now.</div>}
                 </Form>
 
               </Well>

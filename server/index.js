@@ -27,10 +27,15 @@ app.post('/api/seedSubmit', (req, res) => {
 
       const messages = [];
       accountData.transfers.forEach(transfer => {
-        const message = iota.utils.extractJson(transfer);
-        if (message !== null) {
-          console.log('message', message);
-          messages.push(message);
+        const sentMsg = iota.utils.extractJson(transfer);
+        if (sentMsg !== null) {
+          const { name, message } = JSON.parse(sentMsg);
+          const newTx = {
+            name:name,
+            message: message,
+            value: transfer[0].value
+          }
+          messages.push(newTx);
         }
       })
       res.send(messages);

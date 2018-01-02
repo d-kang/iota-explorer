@@ -6,6 +6,29 @@ import Table from './Table';
 class App extends React.Component {
   state = {
     isActive: false,
+    rankedList: [
+      {"name":"David ","message":"Test1", value: 1}, {"name":"David","message":"Test2", value: 2},
+    ],
+  }
+
+  renderRankedList = () => {
+    return (
+      this.state.rankedList.map(({ message, name, value }, i) => {
+        const rank = i + 1;
+        return (
+          <tr key={i}>
+            <td className="iota__rank">{rank}</td>
+            <td className="iota__name">{name}</td>
+            <td className="iota__message">{message}</td>
+            <td className="iota__value">{value}</td>
+          </tr>
+        );
+      })
+    )
+  }
+
+  updateRankedList = (rankedList) => {
+    this.setState({ rankedList }, () => console.log('updateRankedList', this.state.rankedList));
   }
 
   toggleSidebar = () => {
@@ -15,6 +38,8 @@ class App extends React.Component {
   myClassObj = () => {
     return this.state.isActive ? style.isActive : style.isNotActive;
   }
+
+
 
   render () {
     return (
@@ -26,9 +51,11 @@ class App extends React.Component {
           />
           <Table
             myClass={this.myClassObj}
+            renderRankedList={this.renderRankedList}
           />
         </main>
         <Sidebar
+          updateRankedList={this.updateRankedList}
           myClass={this.myClassObj}
         />
       </div>

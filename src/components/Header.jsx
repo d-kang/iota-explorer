@@ -5,7 +5,6 @@ class Header extends React.Component {
   render() {
     return (
       <header className="header">
-        {console.log('this.props', this.props)}
         <p className="header__title">My <span><img className="header__logo" src={logo} /></span> Leaderboard</p>
         <nav>
           <div className="nav-right hidden-xs">

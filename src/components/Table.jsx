@@ -14,12 +14,14 @@ class Table extends React.Component {
             </tr>
           </thead>
           <tbody id="leaderboard">
-            <tr>
+
+            {/* <tr>
               <td className="iota__rank"></td>
               <td className="iota__name"></td>
               <td className="iota__message">Nothing here right now. Generate an address and tell someone (or you yourself) to send a transaction with a message to it.</td>
               <td className="iota__value"></td>
-            </tr>
+            </tr> */}
+            {this.props.renderRankedList()}
           </tbody>
         </table>
       </section>
