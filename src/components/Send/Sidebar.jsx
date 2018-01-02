@@ -48,7 +48,7 @@ class Sidebar extends React.Component {
         <ul className="sidebar-list">
           <li className={this.props.myClass().sideBarItem}>
             <a
-              href="#"
+              href="#/send"
               className="sidebar-anchor"
               data-toggle="collapse"
               data-target="#setSeed"
@@ -75,7 +75,7 @@ class Sidebar extends React.Component {
           </li>
           <li className={this.props.myClass().sideBarItem}>
             <a
-              href="#"
+              href="#/send"
               className="sidebar-anchor"
               data-toggle="collapse"
               data-target="#getAddresses"

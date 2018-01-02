@@ -13,14 +13,10 @@ import {
 const Main = () => {
   return (
     <HashRouter>
-      <div>
-        <Link to='/'>Leaderboard</Link>
-        <Link to='/send'>Send</Link>
-        <Switch>
-          <Route exact path='/' component={Leaderboard} />
-          <Route exact path="/send" component={Send} />
-        </Switch>
-      </div>
+      <Switch>
+        <Route exact path='/' component={Leaderboard} />
+        <Route exact path="/send" component={Send} />
+      </Switch>
     </HashRouter>
   )
 }
