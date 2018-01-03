@@ -6,7 +6,6 @@ class Header extends React.Component {
     return (
       <header className="header">
         <Link to='/'>Leaderboard</Link>
-        {'  '}
         <Link to='/send'>Send</Link>
         <p className="header__title">My <span><img className="header__logo" src={logo} /></span> Leaderboard</p>
         <nav>
